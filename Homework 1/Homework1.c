@@ -7,6 +7,8 @@
 #define NUMLINES 10
 #define MAXCHARS 102
 
+int sort(char one[], char two[]);//signature declaration
+
 int main (int argc, char *argv[])
 {
 
@@ -90,6 +92,20 @@ int main (int argc, char *argv[])
   strcpy(storage[i], input);
  }
 
+//Sort each element of the double array
+for (int j = 9; j > 0; j--){
+	for(int i = 0; i < j; i++){
+		if (sort(storage[i], storage[i+1])>0){
+			char* temp = storage[i+1];
+			storage[i+1] = storage[i];
+			storage[i] = temp;
+			}
+		}
+	}
+
+
+
+
 //print out each of the elements in the double array 
  for (i = 0; i <= NUMLINES - 1; i++)
  {
@@ -98,11 +114,21 @@ int main (int argc, char *argv[])
  return 0;
  
  
+ 	int sort(char one[], char two[]){	
+		if (strcmp(one, two)>0){
+			return 1;
+		}
+		else{
+			return 0;
+		}
+		
+	}
+
+ 
+ 
  /* TODO
  
     int isUnique(input, storage)
-    
-    int sort()
     
     sorted output
     
