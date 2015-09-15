@@ -8,6 +8,7 @@
 #define MAXCHARS 102
 
 int sort(char one[], char two[]);//signature declaration
+int stringExists(char *input, char ** storage);
 
 int main (int argc, char *argv[])
 {
@@ -75,6 +76,8 @@ int main (int argc, char *argv[])
    Capture user input and save it to each element in the array
    Using fgets() allows us to capture user formatted data and test the size of the input;
    size is based on the value of the array, in this case 102
+   
+   Added logic to check for duplicates.
   */
 
 
@@ -83,14 +86,29 @@ int main (int argc, char *argv[])
  char *storage[NUMLINES];
  char input[MAXCHARS];
  int i;
+ storage[0] = "/0";  //Initialize for comparison of input to empty storage array
+    
+    for (i = 0; i <= NUMLINES - 1; i++)
+    {
+        printf("Enter a string: ");
+        fgets(input, MAXCHARS, stdin);
+        
+        storage[i] = malloc(strlen(input));
+       
+    // Validation of Input 
+        if(stringExists(input, storage) == 1) {
+            
+            printf("You have previously used this string as input. Please try again.\n");
+            i--;       // Reset counter
+            
+        } else
+        
+            strcpy(storage[i], input);
+    }
 
- for (i = 0; i <= NUMLINES - 1; i++)
- {
-  printf("Enter a string: ");
-  fgets(input, MAXCHARS, stdin);
-  storage[i] = malloc(strlen(input));
-  strcpy(storage[i], input);
- }
+
+
+
 
 //Sort each element of the double array
 for (int j = 9; j > 0; j--){
@@ -124,16 +142,30 @@ for (int j = 9; j > 0; j--){
 		
 	}
 
+}
+
+/* Compares all the values in storage to the input string and returns 0 or 1 to indicate
+    whether the passed input exists in the storage array of pointers.
+*/
+int stringExists(char *input, char ** storage)
+{   
+    while( **storage) {
+        if (strcmp(input, *storage) == 0)
+            return 1;     // input matches an existing string
+        else
+            storage++;
+    }
+    
+    return 0;
+    
+}
+
  
  
  /* TODO
- 
-    int isUnique(input, storage)
-    
+     
     sorted output
     
     makefile
     
     */
-
-}
