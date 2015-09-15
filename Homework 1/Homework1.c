@@ -86,7 +86,6 @@ int main (int argc, char *argv[])
  char *storage[NUMLINES];
  char input[MAXCHARS];
  int i;
- storage[0] = "/0";  //Initialize for comparison of input to empty storage array
     
     for (i = 0; i <= NUMLINES - 1; i++)
     {
@@ -99,13 +98,12 @@ int main (int argc, char *argv[])
         if(stringExists(input, storage)) {
             
             printf("You have previously used this string as input. Please try again.\n");
-            i--;       // Reset counter
+            i--;       // Reset counter to capture the input again
             
         } else
         
             strcpy(storage[i], input);
     }
-
 
 
 
@@ -130,9 +128,11 @@ for (int j = 9; j > 0; j--){
   printf("You Entered [%d]: %s\n", i, storage[i]);
  }
  return 0;
- 
- 
- 	int sort(char one[], char two[]){	
+
+}
+
+
+int sort(char one[], char two[]){	
 		if (strcmp(one, two)>0){
 			return 1;
 		}
@@ -142,7 +142,6 @@ for (int j = 9; j > 0; j--){
 		
 	}
 
-}
 
 /* Compares all the values in storage to the input string and returns 0 or 1 to indicate
     whether the passed input exists in the storage array of pointers.
