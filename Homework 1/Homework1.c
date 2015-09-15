@@ -96,7 +96,7 @@ int main (int argc, char *argv[])
         storage[i] = malloc(strlen(input));
        
     // Validation of Input 
-        if(stringExists(input, storage) == 1) {
+        if(stringExists(input, storage)) {
             
             printf("You have previously used this string as input. Please try again.\n");
             i--;       // Reset counter
