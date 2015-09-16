@@ -9,32 +9,28 @@
 
 int sort(char one[], char two[]);//signature declaration
 int stringExists(char *input, char ** storage);
+void printData(char **storage, int asc_flag);
 
 int main (int argc, char *argv[])
-{
-
-                  
-/*      
- 	  This section parses the command line to obtain the ascending and descending order
-	  and to ensure that the user has inputted one command line parameter 
- */
-  
+{     
+	/*      
+ 	This section parses the command line to obtain the ascending and descending order
+	and to ensure that the user has inputted one command line parameter  
+	*/
+ 
   int command_line_options;	   
   int asc_flag = 1;		   // Flag for setting ascending order or descending order
                            // If set to 1, it means ascending; Set to 0, it means descending
                            
   
   opterr = 0;			   // This flag prevents error messages to be passed to stderr
-  
-  
   // This checks for user not putting any flags at the command line 
-  if (argc == 1) {
+  if (argc == 1) 
+  {
   	printf ("Missing arguments. Please use -h for command usage.\n");			  
 	exit (1);
   }
-  
   // This parses the command line for the sort order flag and invokes the help command
-  
   while ((command_line_options = getopt (argc, argv, "adh")) != -1)
 	switch (command_line_options)
 		{
@@ -76,73 +72,51 @@ int main (int argc, char *argv[])
    Capture user input and save it to each element in the array
    Using fgets() allows us to capture user formatted data and test the size of the input;
    size is based on the value of the array, in this case 102
-   
    Added logic to check for duplicates.
   */
-
-
  printf("Enter 10 string up to 100 characters.\n");
-
  char *storage[NUMLINES];
  char input[MAXCHARS];
- int i;
+ int i,j;
     
     for (i = 0; i <= NUMLINES - 1; i++)
     {
         printf("Enter a string: ");
         fgets(input, MAXCHARS, stdin);
-        
-        storage[i] = malloc(strlen(input));
-       
+        storage[i] = malloc(strlen(input));       
     // Validation of Input 
-        if(stringExists(input, storage)) {
-            
+        if(stringExists(input, storage)) 
+		{
             printf("You have previously used this string as input. Please try again.\n");
             i--;       // Reset counter to capture the input again
-            
         } else
-        
             strcpy(storage[i], input);
     }
-
-
-
-
+	
 //Sort each element of the double array
-for (int j = 9; j > 0; j--){
-	for(int i = 0; i < j; i++){
+for (j = 9; j > 0; j--){
+	for(i = 0; i < j; i++){
 		if (sort(storage[i], storage[i+1])>0){
 			char* temp = storage[i+1];
 			storage[i+1] = storage[i];
 			storage[i] = temp;
-			}
+ 			}
 		}
 	}
 
+printData(storage, asc_flag);
 
-
-
-//print out each of the elements in the double array 
- for (i = 0; i <= NUMLINES - 1; i++)
- {
-  printf("You Entered [%d]: %s\n", i, storage[i]);
- }
  return 0;
-
 }
-
-
-int sort(char one[], char two[]){	
-		if (strcmp(one, two)>0){
-			return 1;
-		}
-		else{
-			return 0;
-		}
-		
+int sort(char one[], char two[])
+{	
+	if (strcmp(one, two)>0){
+		return 1;
 	}
-
-
+	else{
+		return 0;
+	}
+}
 /* Compares all the values in storage to the input string and returns 0 or 1 to indicate
     whether the passed input exists in the storage array of pointers.
 */
@@ -154,17 +128,27 @@ int stringExists(char *input, char ** storage)
         else
             storage++;
     }
-    
     return 0;
-    
 }
 
- 
- 
- /* TODO
-     
-    sorted output
-    
-    makefile
-    
-    */
+void printData(char **storage, int asc_flag)
+{   
+	int i;
+	if (asc_flag == 1)
+	{
+  	  printf("Your strings in ascending order:\n");
+  	  for( i = 0; i <= NUMLINES - 1; i++)
+  	  {
+   	    printf("You Entered: %s\n", storage[i]);
+  	  }
+ 	}
+ 	else if (asc_flag == 0)
+ 	{
+  	  printf("Your strings in descending order:\n");
+  	  for ( i = NUMLINES -1; i >= 0; i--)
+  	  {
+   	    printf("You Entered: %s\n", storage[i]);
+  	  }
+ 	}
+   }
+
