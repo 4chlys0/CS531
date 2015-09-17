@@ -64,36 +64,9 @@ int main (int argc, char *argv[])
    printf ("Please only use -a or -d to specify ascending or descending order.\n");  
    exit (1);
  }
-
-
-  /*
-   Capture user input and save it to each element in the array
-   Using fgets() allows us to capture user formatted data and test the size of the input;
-   size is based on the value of the array, in this case 102
-   Added logic to check for duplicates.
-  */
- printf("Enter 10 string up to 100 characters.\n");
- char *storage[NUMLINES];
- char input[MAXCHARS];
- int i,j;
-    
- for (i = 0; i <= NUMLINES - 1; i++)
- {
-     printf("Enter a string: ");
-     fgets(input, MAXCHARS, stdin);
-     storage[i] = malloc(strlen(input));       
-
-
-     if(stringExists(input, storage)) 
-	 {
-         printf("You have previously used this string as input. Please try again.\n");
-         i--;
-     } else
-         strcpy(storage[i], input);
- }
-	
+ getInput(asc_flag);
  //Sort each element of the double array
- for (j = 9; j > 0; j--)
+ /*for (j = 9; j > 0; j--)
  {
 	for(i = 0; i < j; i++)
 	{
@@ -104,12 +77,36 @@ int main (int argc, char *argv[])
 			storage[i] = temp;
  		}
 	}
- }
- 
- printData(storage, asc_flag); //Call the printData() function and send the storage[] and asc_flag
+ }*/
  return 0;
 }
+  /*
+   Capture user input and save it to each element in the array.
+   Using fgets() allows us to capture user formatted data and test the size of the input;
+   size is based on the value of the array, in this case 102.
+   Added logic to check for duplicates.
+  */
+void getInput(int asc_flag)
+{
+ printf("Enter 10 string up to 100 characters.\n");
+ char *storage[NUMLINES];
+ char input[MAXCHARS];
+ int i,j;    
+ for (i = 0; i <= NUMLINES - 1; i++)
+ {
+     printf("Enter a string: ");
+     fgets(input, MAXCHARS, stdin);
+     storage[i] = malloc(strlen(input));       
 
+     if(stringExists(input, storage)) 
+	 {
+         printf("You have previously used this string as input. Please try again.\n");
+         i--;
+     } else
+         strcpy(storage[i], input);
+ }
+ printData(storage, asc_flag); 
+}
 /* Compares all the values in storage to the input string and returns 0 or 1 to indicate
     whether the passed input exists in the storage array of pointers.
 */
