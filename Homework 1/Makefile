@@ -1,4 +1,5 @@
+CC=GCC
 CFLAGS=-Wall -g 
 
 clean:
-	 rm -f homeWork1
+	 rm -f HW1_Reimers
