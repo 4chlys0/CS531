@@ -5,9 +5,9 @@
 #include <unistd.h>
 
 #define NUMLINES 10
-#define MAXCHARS 102
+#define MAXCHARS 102 // Chris will check 
 
-//signature declarations
+
 int sort(char one[], char two[]); 
 int stringExists(char *input, char ** storage);
 void printData(char **storage, int asc_flag);
@@ -20,16 +20,19 @@ int main (int argc, char *argv[])
   */
   int command_line_options;	   
   int asc_flag = 1;	 
+
   /*Flag for setting ascending order or descending order.
     If set to 1, it means ascending; Set to 0, it means descending
   */	
   opterr = 0;  // This flag prevents error messages to be passed to stderr
+ 
   // This checks for user not putting any flags at the command line 
   if (argc == 1) 
   {
   	printf ("Missing arguments. Please use -h for command usage.\n");			  
 	exit (1);
   }
+
   // This parses the command line for the sort order flag and invokes the help command
  while ((command_line_options = getopt (argc, argv, "adh")) != -1)
     switch (command_line_options)
@@ -61,6 +64,8 @@ int main (int argc, char *argv[])
    printf ("Please only use -a or -d to specify ascending or descending order.\n");  
    exit (1);
  }
+
+
   /*
    Capture user input and save it to each element in the array
    Using fgets() allows us to capture user formatted data and test the size of the input;
@@ -77,11 +82,12 @@ int main (int argc, char *argv[])
      printf("Enter a string: ");
      fgets(input, MAXCHARS, stdin);
      storage[i] = malloc(strlen(input));       
-     // Validation of Input 
+
+
      if(stringExists(input, storage)) 
 	 {
          printf("You have previously used this string as input. Please try again.\n");
-         i--;// Reset counter to capture the input again
+         i--;
      } else
          strcpy(storage[i], input);
  }
@@ -99,9 +105,11 @@ int main (int argc, char *argv[])
  		}
 	}
  }
+ 
  printData(storage, asc_flag); //Call the printData() function and send the storage[] and asc_flag
  return 0;
 }
+
 /* Compares all the values in storage to the input string and returns 0 or 1 to indicate
     whether the passed input exists in the storage array of pointers.
 */
@@ -109,12 +117,13 @@ int stringExists(char *input, char ** storage)
 {   
     while( **storage) {
         if (strcmp(input, *storage) == 0)
-            return 1;     // input matches an existing string
+            return 1;     
         else
             storage++;
     }
     return 0;
 }
+
 int sort(char one[], char two[])
 {	
 	if (strcmp(one, two)>0){
@@ -124,6 +133,8 @@ int sort(char one[], char two[])
 		return 0;
 	}
 }
+
+
 void printData(char **storage, int asc_flag)
 {   
  /*Based on the value of asc_flag, this function displays the sorted data
@@ -140,7 +151,7 @@ void printData(char **storage, int asc_flag)
 	  printf("String with the lowest ascii value: %s", storage[0]);
 	  printf("String with the highest ascii value: %s", storage[9]);
  	}
- 	else if (asc_flag == 0)
+ 	else if (asc_flag == 0)   // Chris will fix
  	{
   	  printf("Your strings in descending order:\n");
   	  for ( i = NUMLINES -1; i >= 0; i--)
