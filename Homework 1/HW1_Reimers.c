@@ -5,7 +5,7 @@
 #include <unistd.h>
 
 #define NUMLINES 10
-#define MAXCHARS 102 // Chris will check 
+#define MAXCHARS 102 //captures null terminator added by fgets() and line feed or carriage return  
 
 int sort(char one[], char two[]); 
 int stringExists(char *input, char ** storage);
