@@ -70,12 +70,13 @@ int main (int argc, char *argv[])
 
  return 0;
 }
-  /*
-   Capture user input and save it to each element in the array.
-   Using fgets() allows us to capture user formatted data and test the size of the input;
-   size is based on the value of the array, in this case 102.
-   Added logic to check for duplicates.
-  */
+ /*
+  Capture user input and save it to each element in the array.
+  Using fgets() allows us to capture user formatted data and test the size of the input;
+  size is based on the value of the array, in this case 102. This accounts for the
+  '0\' that is added to the end of the string by fgets() and the carriage return or 
+  line feed that is being captured. 
+ */
 void getInput(int asc_flag)
 {
  printf("Enter 10 string up to 100 characters.\n");
@@ -96,6 +97,19 @@ void getInput(int asc_flag)
          strcpy(storage[i], input);
  }
  sortArray(storage, asc_flag); 
+}
+/* Compares all the values in storage to the input string and returns 0 or 1 to indicate
+    whether the passed input exists in the storage array of pointers.
+*/
+int stringExists(char *input, char ** storage)
+{   
+    while( **storage) {
+        if (strcmp(input, *storage) == 0)
+            return 1;     
+        else
+            storage++;
+    }
+    return 0;
 }
 /*
  From the getInput(); we pass the storage array of pointer to the sortArray(). Here,
@@ -120,19 +134,6 @@ void sortArray(char **storage, int asc_flag)
 	}
  }
   printData(storage, asc_flag);
-}
-/* Compares all the values in storage to the input string and returns 0 or 1 to indicate
-    whether the passed input exists in the storage array of pointers.
-*/
-int stringExists(char *input, char ** storage)
-{   
-    while( **storage) {
-        if (strcmp(input, *storage) == 0)
-            return 1;     
-        else
-            storage++;
-    }
-    return 0;
 }
  /*Based on the value of asc_flag, this function displays the sorted data
    in the storage[] of pointers and prints the highest and lowest ascii values
