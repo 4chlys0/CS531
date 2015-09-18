@@ -1,0 +1,62 @@
+#include <stdio.h>
+#include <string.h>
+
+void sort(char **one[], char **two[]);//signature declaration
+
+int main(int argc, char *argv[]) {
+	char *store[10];
+	store[0] = "aw";
+	store[1] = "ae";
+	store[2] = "ar";
+	store[3] = "af";
+	store[4] = "at"; 
+	store[5] = "ay"; 
+	store[6] = "ac";
+	store[7] = "ax"; 
+	store[8] = "aa";
+	store[9] = "ab";
+		printf("%s\n",store[0]);
+		printf("%s\n",store[1]);
+		printf("%s\n",store[2]);
+		printf("%s\n",store[3]);
+		printf("%s\n",store[4]);
+		printf("%s\n",store[5]);
+		printf("%s\n",store[6]);
+		printf("%s\n",store[7]);
+		printf("%s\n",store[8]);
+		printf("%s\n",store[9]);
+		printf("%s\n", "_____________");
+		
+	
+	for (int j = 9; j > 0; j--){
+		for(int i = 0; i < j; i++){
+			sort(store[i], store[i+1]);
+			
+		}
+	}
+	printf("%s\n",store[0]);
+	printf("%s\n",store[1]);
+	printf("%s\n",store[2]);
+	printf("%s\n",store[3]);
+	printf("%s\n",store[4]);
+	printf("%s\n",store[5]);
+	printf("%s\n",store[6]);
+	printf("%s\n",store[7]);
+	printf("%s\n",store[8]);
+	printf("%s\n",store[9]);
+	
+
+}
+	void sort(char **one[], char **two[]){	
+			if (strcmp(one, two)>0){
+				//printf("%s\n",one);
+				//printf("%s\n",two);
+				char* temp = two;
+				two = one;
+				one = temp;
+				//printf("%s\n",one);
+				//printf("%s\n",two);
+			}
+	}
+
+
