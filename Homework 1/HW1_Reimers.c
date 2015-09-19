@@ -1,5 +1,4 @@
 /*
-
 George Mason University
 CS 531: Fundamentals of Systems Programming
 
@@ -14,9 +13,12 @@ that with the highest ascii value.
 The program is invoked with command line arguments -a to specify printing in ascending 
 order or -d to specify printing in descending order. Specifying a -h argument prints the
 help for the command.
-	
-*/
 
+Authors:
+	Stephan Reimers
+	Christopher Day
+	Rijul Mandlekar
+*/
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -35,7 +37,6 @@ void sortArray(char **storage, int asc_flag);
 
 int main (int argc, char *argv[])
 {     
-  
   int command_line_options;	   
   int asc_flag = 1;	  // Flag for setting ascending order (1) or descending order (0).
 	
@@ -71,8 +72,7 @@ int main (int argc, char *argv[])
 			exit (1);
 	}		
 		
-
-  // Checks	any remaining flags or improperly formed flags at the command line & rejects 	
+ // Checks any remaining flags or improperly formed flags at the command line & rejects 	
  if (optind < argc)
  {
    printf ("Please only use -a or -d to specify ascending or descending order.\n");  
@@ -96,7 +96,7 @@ void getInput(int asc_flag)
  printf("Enter 10 string up to 100 characters.\n");
  char *storage[NUMLINES];
  char input[MAXCHARS];
-// int i,j;    
+
  for (int i = 0; i <= NUMLINES - 1; i++)
  {
      printf("Enter string # %d: ", i+1);
@@ -159,7 +159,6 @@ void sortArray(char **storage, int asc_flag)
 */
 void printData(char **storage, int asc_flag)
 {   
-	
 	if (asc_flag == 1)
 	{
   	  printf("\nYour strings printed in ascending order:\n");
@@ -178,5 +177,4 @@ void printData(char **storage, int asc_flag)
  	}
  	  printf("String with the lowest ascii value: %s", storage[0]);
 	  printf("String with the highest ascii value: %s\n", storage[9]);
-
 }
