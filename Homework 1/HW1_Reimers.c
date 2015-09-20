@@ -29,7 +29,6 @@ Authors:
 #define NUMLINES 10
 #define MAXCHARS 102 //captures null terminator added by fgets() and line feed or carriage return  
 
-int sort(char one[], char two[]); 
 int inputExists(char *input_value, char **storage);
 void printData(char **storage, int asc_flag);
 void getInput();
@@ -49,7 +48,7 @@ int main (int argc, char *argv[])
 	exit (1);
   }
 
-  // Parses the command line for arguments
+// Parses the command line for arguments
  while ((command_line_options = getopt (argc, argv, "adh")) != -1)
     switch (command_line_options)
 	{
@@ -93,7 +92,7 @@ int main (int argc, char *argv[])
  */
 void getInput(int asc_flag)
 {
- printf("Enter 10 string up to 100 characters.\n");
+ printf("Enter 10 strings up to 100 characters.\n");
  char *storage[NUMLINES];
  char input[MAXCHARS];
 
@@ -118,9 +117,9 @@ void getInput(int asc_flag)
 /* Compares all the values in storage to the input string and returns 0 or 1 to indicate
     whether the passed input exists in the storage array of pointers.
 */
-int inputExists(char *input_value, char ** storage)
+int inputExists(char *input_value, char **storage)
 {   
-    while( **storage) {
+    while(**storage) {
         if (strcmp(input_value, *storage) == 0)
             return 1;     
         else
@@ -154,7 +153,7 @@ void sortArray(char **storage, int asc_flag)
   printData(storage, asc_flag);
 }
  
-/*Based on the value of asc_flag, this function displays the sorted data
+/* Based on the value of asc_flag, this function displays the sorted data
    in the storage[] of pointers and prints the highest and lowest ascii values
 */
 void printData(char **storage, int asc_flag)
@@ -163,17 +162,13 @@ void printData(char **storage, int asc_flag)
 	{
   	  printf("\nYour strings printed in ascending order:\n");
   	  for(int i = 0; i <= NUMLINES - 1; i++)
-  	  {
    	    printf("You Entered: %s\n", storage[i]);
-  	  }
  	}
  	else
  	{
   	  printf("\nYour strings printed in descending order:\n");
   	  for (int i = NUMLINES -1; i >= 0; i--)
-  	  {
    	    printf("You Entered: %s\n", storage[i]);
-  	  }
  	}
  	  printf("String with the lowest ascii value: %s", storage[0]);
 	  printf("String with the highest ascii value: %s\n", storage[9]);
