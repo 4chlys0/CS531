@@ -65,6 +65,9 @@ int cs531_system(const char *comm)
 	{
 	if	(signal(SIGINT,	sig_handler)	==	SIG_ERR)		
 		printf("\n can't catch	SIGINT	\n");	
+		while(1)
+		sleep(1);
+	//		return 0;
 	}
-	return 0;
+
 }
