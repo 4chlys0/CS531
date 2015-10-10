@@ -26,7 +26,7 @@ int cs531_system(const char *comm)
 	unsigned char buffer[100];
 	int bytes_read, i, statusOfChild;
 	
-	if (sleepFork = fork() == 0)
+	if ((sleepFork = fork()) == 0)
 	{
 	if ((child = fork()) == 0)
 	{
