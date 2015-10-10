@@ -7,6 +7,14 @@
 #include <errno.h>
 #include <fcntl.h>
 
+void	sig_handler(int signo)	
+{	
+	if (signo == SIGINT)	
+		printf("received SIGINT\n");	
+}	
+
+
+
 int main (void)
 {
 	cs531_system("ls -l");
