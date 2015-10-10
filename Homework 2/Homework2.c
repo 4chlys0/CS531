@@ -14,10 +14,12 @@ int main (void)
 
 int cs531_system(const char *comm)
 {
-	pid_t child, c;
+	pid_t child, c, sleepFork;
 	unsigned char buffer[100];
 	int bytes_read, i, statusOfChild;
 	
+	if (sleepFork = fork() == 0)
+	{
 	if ((child = fork()) == 0)
 	{
 		int fd = open("/bin/sh", O_RDONLY);
@@ -50,4 +52,13 @@ int cs531_system(const char *comm)
 		}
 	}
 	exit(statusOfChild);
+	}
+	else 
+	{
+	if	(signal(SIGINT,	sig_handler)	==	SIG_ERR)		
+		printf("\n	can't	catch	SIGINT	\n");	
+	while(1)	
+		sleep(1);	
+	return	0;		
+	}
 }
