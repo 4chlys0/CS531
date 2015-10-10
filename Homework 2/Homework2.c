@@ -9,7 +9,7 @@
 
 int main (void)
 {
-	cs531_system("ls");
+	cs531_system("ls -l");
 }
 
 int cs531_system(const char *comm)
@@ -20,33 +20,20 @@ int cs531_system(const char *comm)
 	
 	if ((child = fork()) == 0)
 	{
-		int fd = open("cooldark.txt", O_RDONLY);
+		int fd = open("/bin/sh", O_RDONLY);
 		if (fd < 0)
 		{
-			printf("File could not be loaded.");
+			printf("Shell is not accessible!\n");
 			return -1;
 		}
 		else
 		{
-			do
+			close(0);
+			if (dup((int) execl("/bin/sh", "sh", "-c", comm, (char *)0)) < 0)
 			{
-				bytes_read = read(fd, buffer, sizeof(buffer));
-				if (bytes_read<0)
-				{
-					printf("File could not be read.");
-					return -1;
-				}
-				for (i = 0; i < bytes_read; i++)
-					printf("%c",buffer[i]);
-				printf("\n");
+				printf("Invalid Command");
+				exit(1);
 			}
-			while (bytes_read == sizeof(buffer));
-			if (close(fd)<0)
-			{
-					printf("File unsuccessfully closed.");
-					return -1;
-			}
-
 		}
 	}
 	else
@@ -58,13 +45,8 @@ int cs531_system(const char *comm)
 		}
 		else
 		{
-			wait(&statusOfChild); //wait for child to finish reading their story
-			printf("The child finished reading its story.\n Exit Code = %d\n", statusOfChild);
-			if (execlp(comm, comm, NULL)<0)
-			{
-				printf("Invalid Command");
-				exit(1);
-			}
+			wait(&statusOfChild);
+			printf("Child exited with code: %d\n", statusOfChild);
 		}
 	}
 	exit(statusOfChild);
