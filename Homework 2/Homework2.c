@@ -60,6 +60,6 @@ int cs531_system(const char *comm)
 	}
 	exit(statusOfChild);
 	}
-	while(signal(SIGINT,sig_handler)!=SIG_ERR)		
+	while(signal(SIGINT,sig_handler)!=SIG_ERR);		
 
 }
