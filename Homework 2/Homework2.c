@@ -54,7 +54,7 @@ int cs531_system(const char *comm)
 		if (child == (pid_t)(-1))
 		{
 			fprintf(stderr, "Fork failed.\n");
-			exit(1);
+			return(-1);
 		}
 		else
 		{
@@ -63,7 +63,7 @@ int cs531_system(const char *comm)
 			if (execlp(comm, comm, NULL)<0)
 			{
 				printf("Invalid Command");
-				return -1;
+				exit(1);
 			}
 		}
 	}
