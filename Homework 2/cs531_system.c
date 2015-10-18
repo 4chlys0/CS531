@@ -2,10 +2,10 @@
  George Mason University
  CS 531: Fundamentals of Systems Programming
  Homework 2
- This program implements a customized of the Linux/Unix system() library call. Similar to the system() function, the
- new version cs531_system() function hands its argument command to the sh command interpreter.  The parent process 
- waits for the shell to finish executing the command while ignoring the SIGINT (CNTRL + C) signal. The version of this 
- function uses the open(), fork(), close(), and dup() functions and implements the sigaction signal handling 
+ This program implements a customized version of the Linux/Unix system() library call. Similar to the Unix/Linux 
+ system() function, the new version cs531_system() function hands its argument command to the sh command interpreter.
+ The parent process waits for the shell to finish executing the command while ignoring the SIGINT (CNTRL + C) signal. 
+ The version of this function uses the open(), fork(), close(), and dup() functions and implements the sigaction signal handling 
  structure.
  
  Authors:
