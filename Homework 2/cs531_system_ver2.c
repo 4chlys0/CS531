@@ -31,7 +31,7 @@ int main (void)
      // cs531_system("ls -la");
      // cs531_system("ps aux | more");
      // cs531_system("uname -a &");
-        cs531_system("for i in `seq 100000`; do echo Test; sleep 1; done;");
+        cs531_system("for i in `seq 100000`; do echo Test $i; sleep 1; done;");
      // cs531_system("cat test.log");
      // cs531_system(NULL);
      // cs531_system("TEST");
