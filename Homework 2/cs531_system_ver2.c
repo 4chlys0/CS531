@@ -59,7 +59,7 @@ int cs531_system(const char *comm)
         
         close(STDIN_FILENO);
         dup(fd);
-          //    close(fd); // Possibly will need to clean-up and fd at some point
+          //    close(fd); // Possibly will need to clean-up/close fd at some point
 
     }
     
