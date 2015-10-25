@@ -1,3 +1,17 @@
+/*
+George Mason University
+CS 531: Fundamentals of Systems Programming
+Homework 2
+This program attempts to recreate the C library function "int system(const char*comm)"
+which executes subprocesses and commands. Run properly, this code should spawn a child
+and execute the command specified within the main method.
+
+Authors:
+	Stephan Reimers
+	Christopher Day
+	Rijul Mandlekar
+*/
+
 #include <stdio.h>
 #include <sys/types.h>
 #include <sys/wait.h>
@@ -7,6 +21,10 @@
 #include <errno.h>
 #include <fcntl.h>
 
+/*
+Allows interruption and exiting when
+"ctrl-c" is pressed
+*/
 void	sig_handler(int signo)	
 {	
 	if (signo == SIGINT)	
@@ -14,12 +32,18 @@ void	sig_handler(int signo)
 }	
 
 
-
+/*
+Main method with preexisting ls command
+*/
 int main (void)
 {
 	cs531_system("ls -l");
 }
 
+/*
+Attempts to spawn a shell and execute a command as well
+as forking and creating a new child.
+*/
 int cs531_system(const char *comm)
 {
 	pid_t child, c;
