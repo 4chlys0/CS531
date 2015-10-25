@@ -51,7 +51,7 @@ int cs531_system(const char *comm)
 	int bytes_read, i, statusOfChild;
 	
 	do{
-	if ((child = fork()) == 0)
+	if ((child = fork()) == 0) //Process with Pid 0
 	{
 		int fd = open("/bin/sh", O_RDONLY);
 		if (fd < 0)
@@ -59,7 +59,7 @@ int cs531_system(const char *comm)
 			printf("Shell is not accessible!\n");
 			return -1;
 		}
-		else
+		else //Sucessful shell generation
 		{
 			close(0);
 			if (dup((int) execl("/bin/sh", "sh", "-c", comm, (char *)0)) < 0)
@@ -69,14 +69,14 @@ int cs531_system(const char *comm)
 			}
 		}
 	}
-	else
+	else //Process with new Pid
 	{
 		if (child == (pid_t)(-1))
 		{
 			fprintf(stderr, "Fork failed.\n");
 			return(-1);
 		}
-		else
+		else//Sucessful child process generation
 		{
 			wait(&statusOfChild);
 			printf("Child exited with code: %d\n", statusOfChild);
