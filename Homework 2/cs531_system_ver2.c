@@ -23,18 +23,14 @@
 #include <signal.h>
 #include <fcntl.h>
 
+//int cs531_system(const char *comm);
 
+/*
 int main (void)
 {
-     // cs531_system("ls -la");
-     // cs531_system("ps aux | more");
-     // cs531_system("uname -a &");
-        cs531_system("for i in `seq 100`; do echo Test $i; sleep 1; done;");
-     // cs531_system("cat test.log");
-     // cs531_system("ping -c50 8.8.8.8");
-     // cs531_system(NULL);
-     // cs531_system("./a_madeup_command");
+        cs531_system("for i in `seq 25`; do echo Test $i; sleep 1; done;");
 }
+*/
 
 int cs531_system(const char *comm)
 {
@@ -47,7 +43,6 @@ int cs531_system(const char *comm)
     sa.sa_flags = 0;
     sigaction(SIGINT, &sa, NULL);
     
-    
   //Check to see if the sh interpreter is available
     fd = open("/bin/sh", O_RDONLY);
     if (fd < 0)
@@ -56,17 +51,13 @@ int cs531_system(const char *comm)
         return -1;
         
     } else {
-        
         close(STDIN_FILENO);
         dup(fd);
-          //    close(fd); // Possibly will need to clean-up/close fd at some point
-
     }
     
   // Create a child process that through an exec() function handling an SH interpreter will be passed a executable argument
     if ((child = fork()) == 0)
     {
-
            if (execle("/bin/sh", "sh", "-c", comm, (char *)0) < 0)
             {
                 printf("Invalid Command");
@@ -78,8 +69,7 @@ int cs531_system(const char *comm)
             perror("Fork failed.\n");
             return(-1);
         }
-    
-    
+        
     wait(&statusOfChild);  // Parent waits for child to finish
     printf("Child exited with code: %d\n", statusOfChild);
     exit(statusOfChild);
