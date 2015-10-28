@@ -67,10 +67,10 @@ int cs531_system(const char *comm)
     else if (child == (pid_t)(-1))
         {
             perror("Fork failed.\n");
-            return(-1);
+            return -1;
         }
         
     wait(&statusOfChild);  // Parent waits for child to finish
-    printf("Child exited with code: %d\n", statusOfChild);
+    printf("Child process exited with code: %d\n", statusOfChild);
     exit(statusOfChild);
 }
